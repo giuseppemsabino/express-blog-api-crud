@@ -34,8 +34,16 @@ function modify(req, res) {
 
 //destroy
 function destroy(req, res) {
-  const id = parseInt(req.params.id);
-  res.json(`Eliminazione del post con id ${id}`);
+    const id = parseInt(req.params.id);
+
+    const postByid = postData.find((post) => post.id === id);
+
+    const postIndex = postData.indexOf(postByid)
+
+    postData.splice(postIndex, 1)
+
+    res.json(postData)
+    
 }
 
 module.exports = { index, show, update, modify, destroy };
