@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const postsRouter = require('./routers/posts')
-const posts= require('./data/post-list')
+const posts= require('./data/postList')
 
 const port = 3000;
 

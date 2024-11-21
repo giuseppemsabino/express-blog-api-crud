@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const postsControllers = require("../controllers/post-control")
+const postsControllers = require("../controllers/postControl")
 
 //index
 router.get('/posts', postsControllers.index );
@@ -19,13 +19,5 @@ router.patch('/:id', postsControllers.modify);
 
 //destroy
 router.delete('/:id', postsControllers.destroy);
-
-
-
-
-
-
-
-
 
 module.exports = router;
