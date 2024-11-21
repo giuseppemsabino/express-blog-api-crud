@@ -6,33 +6,19 @@ const postsControllers = require("../controllers/post-control")
 router.get('/posts', postsControllers.index );
 
 //show
-router.get('/:id', (req, res) => {
-    const { id } = req.params;
-    res.json(`Dettaglio del post ${id}`);
-});
+router.get('/:id', postsControllers.show);
 
 //store
-router.post('/', (req, res) => {
-    res.json(`Crea un nuovo post`)
-});
+router.post('/', postsControllers.show);
 
 //update
-router.put('/:id', (req,res) => {
-    const {id}= req.params;
-    res.json(`Modifica totale del post con id ${id}`);
-});
+router.put('/:id',postsControllers.update);
 
 //modify
-router.patch('/:id', (req,res)=> {
-    const {id}= req.params;
-    res.json(`Modifica parziale del post con id ${id}`);
-});
+router.patch('/:id', postsControllers.modify);
 
-//delete
-router.delete('/:id',  (req,res)=> {
-    const {id}= req.params;
-    res.json(`Eliminazione del post con id ${id}`);
-});
+//destroy
+router.delete('/:id', postsControllers.destroy);
 
 
 
