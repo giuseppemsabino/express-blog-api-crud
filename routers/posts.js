@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const postsControllers = require("../controllers/post-control")
 
 //index
-router.get('/posts', (req,res) => {
-    res.send('lista dei post');
-});
+router.get('/posts', postsControllers.index );
 
 //show
 router.get('/:id', (req, res) => {
