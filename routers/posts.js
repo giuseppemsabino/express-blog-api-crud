@@ -3,7 +3,7 @@ const router = express.Router();
 const postsControllers = require("../controllers/postControl")
 
 //index
-router.get('/posts', postsControllers.index );
+router.get('/', postsControllers.index );
 
 //show
 router.get('/:id', postsControllers.show);
