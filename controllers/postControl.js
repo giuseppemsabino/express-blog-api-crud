@@ -56,7 +56,7 @@ function update(req, res) {
   const id = parseInt(req.params.id);
 
   
-  const postByid = postData.find((post) => post.id === id);
+  let postByid = postData.find((post) => post.id === id);
   
 
   if (!postByid) {
@@ -68,9 +68,15 @@ function update(req, res) {
 
   const {title,content,image,tags} = req.body;
 
-  if(!title || !content || !image?.length){
+  if(!title || !content || !image ||!tags?.length){
     return res.status(400).json({error: 'invalid params'});
   } 
+
+ 
+  postByid.title = title;
+  postByid.content = content;
+  postByid.image = image;
+  postByid.tags = tags;
 
   res.send(postByid);
 }
