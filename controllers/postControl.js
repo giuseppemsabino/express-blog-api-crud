@@ -25,8 +25,21 @@ function show(req, res) {
 
 //store
 function store(req,res){
-  const newPost = req.body;
-  console.log(req.body);
+  const {title,content,image,tags} = req.body;
+  
+  const newId = parseInt(postData.at(-1).id) + 1;
+  // console.log(newId);
+  newPost = {
+    id : newId,
+    title: title,
+    content: content,
+    image: image,
+    tags: tags 
+  }
+  console.log(newPost);
+
+  postData.push(newPost)
+  
   
   res.json(newPost)
 }
