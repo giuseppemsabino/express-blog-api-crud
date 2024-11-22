@@ -9,9 +9,8 @@ function index(req, res) {
 function show(req, res) {
   const id = parseInt(req.params.id);
 
-  
   const postByid = postData.find((post) => post.id === id);
-  
+
   // console.log("trova",post);
 
   if (!postByid) {
@@ -24,55 +23,51 @@ function show(req, res) {
 }
 
 //store
-function store(req,res){
-  const {title,content,image,tags} = req.body;
+function store(req, res) {
+  const { title, content, image, tags } = req.body;
 
-  if(!title || !content || !image?.length){
-    return res.status(400).json({error: 'invalid params'});
+  if (!title || !content || !image?.length) {
+    return res.status(400).json({ error: "invalid params" });
   }
-  
+
   const newId = parseInt(postData.at(-1).id) + 1;
   // console.log(newId);
   newPost = {
-    id : newId,
+    id: newId,
     title: title,
     content: content,
     image: image,
-    tags: tags 
-  }
+    tags: tags,
+  };
   console.log(newPost);
 
-  postData.push(newPost)
-  
-  
+  postData.push(newPost);
+
   res.status(201).json({
     message: "Post creato con successo!",
-    post: newPost
-})
+    post: newPost,
+  });
 }
 
 //update
 function update(req, res) {
   const id = parseInt(req.params.id);
 
-  
   let postByid = postData.find((post) => post.id === id);
-  
 
   if (!postByid) {
     return res.status(404).json({
       error: "Not found",
-      message: "Post non torvato"
+      message: "Post non torvato",
     });
   }
 
-  const {title,content,image,tags} = req.body;
+  const { title, content, image, tags } = req.body;
 
-  if(!title || !content || !image ||!tags?.length){
-    return res.status(400).json({error: 'invalid params'});
-  } 
+  if (!title || !content || !image || !tags?.length) {
+    return res.status(400).json({ error: "invalid params" });
+  }
 
- 
   postByid.title = title;
   postByid.content = content;
   postByid.image = image;
@@ -89,16 +84,15 @@ function modify(req, res) {
 
 //destroy
 function destroy(req, res) {
-    const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id);
 
-    const postByid = postData.find((post) => post.id == id);
+  const postByid = postData.find((post) => post.id == id);
 
-    const postIndex = postData.indexOf(postByid)
+  const postIndex = postData.indexOf(postByid);
 
-    postData.splice(postIndex, 1)
+  postData.splice(postIndex, 1);
 
-    res.json(postData)
-    
+  res.json(postData);
 }
 
 module.exports = { index, show, store, update, modify, destroy };
