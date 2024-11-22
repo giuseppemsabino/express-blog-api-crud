@@ -10,13 +10,13 @@ function show(req, res) {
   const id = parseInt(req.params.id);
 
   
-  const postByid = postData.find((post) => post.id == id);
+  const postByid = postData.find((post) => post.id === id);
   
   // console.log("trova",post);
 
   if (!postByid) {
     return res.status(404).json({
-      error: "pippo",
+      error: "Not found",
     });
   }
 
@@ -26,6 +26,10 @@ function show(req, res) {
 //store
 function store(req,res){
   const {title,content,image,tags} = req.body;
+
+  if(!title || !content || !image?.length){
+    return res.status(400).json({error: 'invalid params'});
+  }
   
   const newId = parseInt(postData.at(-1).id) + 1;
   // console.log(newId);
@@ -41,13 +45,34 @@ function store(req,res){
   postData.push(newPost)
   
   
-  res.json(newPost)
+  res.status(201).json({
+    message: "Post creato con successo!",
+    post: newPost
+})
 }
 
 //update
 function update(req, res) {
-  const id = req.params.id;
-  res.json(`Modifica totale del post con id ${id}`);
+  const id = parseInt(req.params.id);
+
+  
+  const postByid = postData.find((post) => post.id === id);
+  
+
+  if (!postByid) {
+    return res.status(404).json({
+      error: "Not found",
+      message: "Post non torvato"
+    });
+  }
+
+  const {title,content,image,tags} = req.body;
+
+  if(!title || !content || !image?.length){
+    return res.status(400).json({error: 'invalid params'});
+  } 
+
+  res.send(postByid);
 }
 
 //modify
