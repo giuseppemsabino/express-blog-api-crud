@@ -9,15 +9,26 @@ function index(req, res) {
 function show(req, res) {
   const id = parseInt(req.params.id);
 
-  const postByid = postData.find((post) => post.id === id);
+  
+  const postByid = postData.find((post) => post.id == id);
+  
+  // console.log("trova",post);
 
   if (!postByid) {
     return res.status(404).json({
-      error: "Not found",
+      error: "pippo",
     });
   }
 
   res.send(postByid);
+}
+
+//store
+function store(req,res){
+  const newPost = req.body;
+  console.log(req.body);
+  
+  res.json(newPost)
 }
 
 //update
@@ -36,7 +47,7 @@ function modify(req, res) {
 function destroy(req, res) {
     const id = parseInt(req.params.id);
 
-    const postByid = postData.find((post) => post.id === id);
+    const postByid = postData.find((post) => post.id == id);
 
     const postIndex = postData.indexOf(postByid)
 
@@ -46,4 +57,4 @@ function destroy(req, res) {
     
 }
 
-module.exports = { index, show, update, modify, destroy };
+module.exports = { index, show, store, update, modify, destroy };
