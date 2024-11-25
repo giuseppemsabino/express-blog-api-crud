@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const postsRouter = require("./routers/posts");
 const posts = require("./data/postList");
 const port = 3000;
 
@@ -16,6 +15,7 @@ app.use(express.static("public"));
 app.use(checkTime);
 
 
+const postsRouter = require("./routers/posts");
 app.use("/", postsRouter);
 
 
