@@ -1,29 +1,25 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
-const postsRouter = require('./routers/posts')
-const posts= require('./data/postList')
+const postsRouter = require("./routers/posts");
+const posts = require("./data/postList");
 const port = 3000;
 
+//REGISTRING MIDDLEWARES
+const errorsHandler = require("./middlewares/errorsHandler");
 
-// console.log(app);
 
 // JSON PARSER FOR BODY REQUEST
 app.use(express.json());
 
-app.use(express.static('public/images'));
+
+app.use(express.static("public/images"));
+app.use("/", postsRouter);
 
 
+//*ERROR HANDLER
+app.use(errorsHandler);
 
-app.use('/', postsRouter)
-
-
-app.get ('/', (req,res) => {
-    res.send('server del mio blog')
-})
-
-
+//*START LISTENING
 app.listen(port, () => {
-    console.log(`example app listening on port ${port}`);
-    
-})
+  console.log(`example app listening on port ${port}`);
+});
