@@ -3,8 +3,7 @@ const router = express.Router();
 const postsControllers = require("../controllers/postControl")
 
 
-const checkTime = require("../middlewares/checkTime");
-router.use(checkTime);
+
 
 //index
 router.get('/', postsControllers.index );
