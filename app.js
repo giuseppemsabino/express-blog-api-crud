@@ -7,10 +7,11 @@ const port = 3000;
 const errorsHandler = require("./middlewares/errorsHandler");
 const notFound = require("./middlewares/notFound")
 const checkTime = require("./middlewares/checkTime");
-
+const cors = require('cors');
 
 // JSON PARSER FOR BODY REQUEST
 app.use(express.json());
+app.use(cors());
 app.use(express.static("public"));
 app.use(checkTime);
 
