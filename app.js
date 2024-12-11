@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const posts = require("./data/postList");
+
 const port = 3000;
 
 //REGISTRING MIDDLEWARES
