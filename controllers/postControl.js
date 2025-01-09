@@ -15,7 +15,17 @@ function index(req, res) {
 
 //show
 function show(req, res) {
-  // const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id);
+
+  const sql = "SELECT * FROM `posts` WHERE `id` = ?"
+  connection.query(sql, [id],(err, results)=> {
+    if (err) return res.status(500).json({ error: "Database Query Failed" });
+    res.json(results);
+  })
+
+
+
+
   // const postByid = postData.find((post) => post.id === id);
   // // console.log("trova",post);
   // if (!postByid) {
@@ -24,6 +34,8 @@ function show(req, res) {
   //   });
   // }
   // res.send(postByid);
+
+
 }
 
 //store
