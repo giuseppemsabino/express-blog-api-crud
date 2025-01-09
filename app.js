@@ -1,20 +1,20 @@
-const express = require("express");
-const app = express();
-const posts = require("./data/postList");
+require('dotenv').config();
 
-const port = 3000;
+const express = require("express");
+const cors = require('cors');
+const app = express();
+const port = process.env.HOST_PORT;
+const domain = process.env.HOST_DOMAIN;
 
 //REGISTRING MIDDLEWARES
 const errorsHandler = require("./middlewares/errorsHandler");
 const notFound = require("./middlewares/notFound")
-const checkTime = require("./middlewares/checkTime");
-const cors = require('cors');
 
 // JSON PARSER FOR BODY REQUEST
 app.use(express.json());
 app.use(cors());
 app.use(express.static("public"));
-app.use(checkTime);
+
 
 
 const postsRouter = require("./routers/posts");
@@ -27,5 +27,5 @@ app.use(notFound);
 
 //*START LISTENING
 app.listen(port, () => {
-  console.log(`example app listening on port ${port}`);
+  console.log(`App listening at ${domain}:${port}`);
 });
