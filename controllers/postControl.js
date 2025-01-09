@@ -3,6 +3,14 @@ const connection = require('../db/conn')
 //index
 function index(req, res) {
   // res.json(postData);
+  // const {title, content } = req.query
+  
+  const sql = 'SELECT * FROM `posts`;'
+
+  connection.query(sql, (err, results) => {
+    if (err) return res.status(500).json({error: 'Database Query Failed'});
+    res.json(results);
+  })
 }
 
 //show
@@ -22,12 +30,7 @@ function show(req, res) {
 
   // res.send(postByid);
 
-  const sql = 'SELECT * FROM blog.posts;'
-
-  connection.query(sql, (err, results) => {
-    if (err) return res.status(500).json({error: 'Database Query Failed'});
-    res.json(results);
-  })
+  
 }
 
 //store
